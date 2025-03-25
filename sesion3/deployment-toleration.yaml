@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tolerated-deployment
+  namespace: test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      tolerations:
+        - key: "my-awesome-taint"
+          operator: "Equal"
+          value: "true"
+          effect: "NoSchedule"
+      containers:
+        - name: nginx
+          image: nginx:latest

@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: debian-deployment
+  namespace: test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: debian
+  template:
+    metadata:
+      labels:
+        app: debian
+    spec:
+      containers:
+      - name: debian
+        image: public.ecr.aws/debian/debian:latest
+        imagePullPolicy: Always
+        command: ["/bin/bash", "-c", "apt update && apt upgrade -y && apt install -y curl && sleep 3600"]
+        volumeMounts:
+        - name: debian-volume
+          mountPath: /my-cool-data
+      volumes:
+      - name: debian-volume
+        persistentVolumeClaim:
+          claimName: my-pvc

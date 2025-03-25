@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager-namespace
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/eltioemil/k8s-things.git
+    targetRevision: HEAD
+    path: manifests/cert-manager-namespace  # Path relative to the local folder
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: cert-manager
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

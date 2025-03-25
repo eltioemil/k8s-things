@@ -1,0 +1,73 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-index
+  namespace: default
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Random Meme Generator</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                text-align: center;
+                margin: 100px;
+                background-color: #f4f4f4;
+            }
+            h1 {
+                color: #ff5733;
+            }
+            img {
+                max-width: 80%;
+                height: auto;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                margin-top: 20px;
+            }
+            button {
+                padding: 10px 20px;
+                font-size: 18px;
+                background-color: #007bff;
+                color: white;
+                border: none;
+                cursor: pointer;
+                margin-top: 20px;
+            }
+            button:hover {
+                background-color: #0056b3;
+            }
+        </style>
+    </head>
+    <body>
+
+        <h1>Random Meme Generator</h1>
+        <p>Refresh the page or click the button for a new meme!</p>
+
+        <img id="memeImage" src="" alt="Random Meme">
+        <br>
+        <button onclick="loadRandomMeme()">New Meme</button>
+
+        <script>
+            const memes = [
+                "https://www.laxmasmusica.com/uploads/ck-uploads/2020/02/21/138447226A59914E1ABCA74B3128543D.JPG",
+                "https://s1.abcstatics.com/media/MM/2022/06/17/meme-19.jpg",
+                "https://s3.abcstatics.com/media/MM/2022/06/17/meme-3.JPG",
+                "https://menteplus.com/wp-content/uploads/2020/09/meme14.jpg",
+                "https://s3.abcstatics.com/media/MM/2022/06/17/meme-4.jpg"
+            ];
+
+            function loadRandomMeme() {
+                const randomIndex = Math.floor(Math.random() * memes.length);
+                document.getElementById("memeImage").src = memes[randomIndex];
+            }
+
+            // Load a meme when the page loads
+            loadRandomMeme();
+        </script>
+
+    </body>
+    </html>

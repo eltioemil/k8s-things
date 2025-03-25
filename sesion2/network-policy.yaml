@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: restrict-debian-to-default
+  namespace: test
+spec:
+  podSelector:
+    matchLabels:
+      app: debian
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - podSelector: {}
+    - namespaceSelector:
+        matchLabels:
+          name: default
+    ports:
+    - protocol: TCP
+      port: 80
