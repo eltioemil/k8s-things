@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/eltioemil/k8s-things.git
     targetRevision: HEAD
-    path: manifests/cert-manager-namespace  # Path relative to the local folder
+    path: sesion3/manifests/cert-manager-namespace  # Path relative to the local folder
   destination:
     server: https://kubernetes.default.svc
     namespace: cert-manager
